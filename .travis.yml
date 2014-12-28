@@ -1,0 +1,11 @@
+language: scala
+scala:
+  - 2.11.4
+branches:
+  only:
+    - master
+notifications:
+  email:
+    recipients:
+      - dwestheide@googlemail.com
+script: "sbt coveralls"
