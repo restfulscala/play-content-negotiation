@@ -3,7 +3,7 @@ import play.PlayScala
 
 versionWithGit
 
-git.baseVersion := "0.1.0"
+git.baseVersion := "0.2.0"
 
 name := "play-content-negotiation"
 
