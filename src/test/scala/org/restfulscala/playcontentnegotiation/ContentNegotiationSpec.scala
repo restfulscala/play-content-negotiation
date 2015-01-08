@@ -25,7 +25,9 @@ class ContentNegotiationSpec extends PlaySpec with Results with ScalaFutures {
           as(Accepts.Json, s => JsObject(Seq("msg" -> JsString(s)))),
           as(Accepts.Xml, s => <message>s</message>)
         )
-        def index() = Action { implicit req => representation("foo")(200)}
+        def index() = Action { implicit req =>
+          representation(r => r.respond("foo", 200))
+        }
       }
       forAll(data) { (acceptHeader, responseStatus, contentType) =>
         val result = controller.index()(FakeRequest().withHeaders("Accept" -> acceptHeader))
