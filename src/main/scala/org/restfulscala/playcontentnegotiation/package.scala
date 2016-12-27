@@ -14,14 +14,14 @@ package object playcontentnegotiation {
 
     def apply(a: Representation[A] => Result)(implicit req: RequestHeader): Result = {
       val pfs = representations map SingleAcceptFn(a)
-      val all = pfs.toList ::: notAcceptable :: Nil
+      val all = pfs ::: notAcceptable :: Nil
       val pf = all.reduceLeft(_ orElse _)
       render(pf)
     }
 
     def async(a: Representation[A] => Future[Result])(implicit req: RequestHeader): Future[Result] = {
       val pfs = representations map SingleAsyncAcceptFn(a)
-      val all = pfs.toList ::: notAcceptableAsync :: Nil
+      val all = pfs ::: notAcceptableAsync :: Nil
       val pf = all.reduceLeft(_ orElse _)
       render.async(pf)
     }
@@ -51,8 +51,9 @@ package object playcontentnegotiation {
   class SimpleRepresentation[A, B](
       val accepting: Accepting,
       val representationFactory: A => B)(implicit writeable: Writeable[B]) extends Representation[A] {
-    override def respond(a: A, status: Int): Result =
+    override def respond(a: A, status: Int): Result = {
       Results.Status(status)(representationFactory(a))
+    }
   }
 
   private[playcontentnegotiation] class SingleAcceptFn(accepting: Accepting, responder: () => Result)
