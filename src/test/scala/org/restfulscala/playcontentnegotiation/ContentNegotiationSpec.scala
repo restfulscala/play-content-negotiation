@@ -5,7 +5,6 @@ import org.scalatestplus.play._
 import play.api.libs.json._
 import play.api.mvc._
 import play.api.test.FakeRequest
-import play.api.test.Helpers.contentType
 
 import scala.concurrent.Future
 
