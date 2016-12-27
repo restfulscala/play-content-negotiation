@@ -8,4 +8,6 @@ notifications:
   email:
     recipients:
       - dwestheide@googlemail.com
+jdk:
+  - oraclejdk8
 script: "sbt coveralls"
