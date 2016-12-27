@@ -10,4 +10,7 @@ notifications:
       - dwestheide@googlemail.com
 jdk:
   - oraclejdk8
-script: "sbt coveralls"
+script:
+  - sbt clean coverage test coverageReport
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
