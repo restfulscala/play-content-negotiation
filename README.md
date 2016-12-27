@@ -35,9 +35,9 @@ First of all, the library adds a trait called `Representation`:
 import play.api.mvc._
 
 trait Representation[A] {
-    def accepting: Accepting
-    def respond(a: A, status: Int): Result
-  }
+  def accepting: Accepting
+  def respond(a: A, status: Int): Result
+}
 ```
 
 A `Representation` has an `Accepting` field, which is a class provided by Play and allows to determine whether a given mime type matches an HTTP `Accept` header. In addition, it provides a way to create a Play `Result` for a type `A`, using the given status code.
@@ -87,13 +87,13 @@ Here, we support two representations of a `Sale`, `text/html` and `application/j
 
 ```scala
 def get(saleId: String) = Action.async { implicit req =>
-    negotiate().async { variant =>
-      saleRepository.findById(SaleId(saleId)) map {
-        case Some(sale) => variant.respond(sale, 200)
-        case None => NotFound
-      }
+  negotiate().async { variant =>
+    saleRepository.findById(SaleId(saleId)) map {
+      case Some(sale) => variant.respond(sale, 200)
+      case None => NotFound
     }
   }
+}
 ```
 
 The first thing we do is call the `async` method of our `RespondWith[Sale]`. The function we pass to `async` fetches a `Sale` from a repository and, if it exists, it uses the `Representation` the `RespondWith` has determined to use in order to create a `200` result. If no `Sale` can be found, it returns a `404` response instead. If the client asks for an unsupported content type, the `RespondWith` will return a `406` response like this:
@@ -109,4 +109,7 @@ Vary: Accept
 Acceptable media types: text/html, application/json
 ```
 
+## Contributors
+
+Daniel Westheide
 
