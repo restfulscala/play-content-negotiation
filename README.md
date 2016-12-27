@@ -4,15 +4,11 @@
 )](https://api.travis-ci.org/restfulscala/play-content-negotiation)
 [![codecov](https://codecov.io/gh/restfulscala/play-content-negotiation/branch/master/graph/badge.svg)](https://codecov.io/gh/restfulscala/play-content-negotiation)
 
-This library provides a more declarative and DRY way of content format negotiation for the [Play framework](https://playframework.com/).
+This library provides a more declarative way of content format negotiation for the [Play framework](https://playframework.com/).
 
-Play's content negotiation support is based on pattern matching. Unfortunately, there are a few problems with this approach:
+Play's content negotiation support is based on pattern matching. Unfortunately, there is a problem with this approach: If the server needs to return a ` 406 Not Acceptable` HTTP response, the Play framework has no way of providing a list of supported content types in the response, which would be very helpful for developers programming clients for your web application.
 
-- if the server needs to return a `Not Acceptable` HTTP response, the Play framework has no way of providing a list of supported content types in the response, which would be very helpful for developers programming clients for your web application
-- it's easy to do the wrong thing with Play's content negotiation support, specifically, to do unnecessary database lookups or even perform side effects, even if the server cannot respond with the content type requested by the client
-- to mitigate the former, quite a bit of boilerplate code is required
-
-`play-content-negotiation` aims to solve these problems by allowing you to specify which content types are supported, and how to render them, declaratively. This way, content negotiation and rendering can be decoupled without requiring any boilerplate code.
+`play-content-negotiation` aims to solve this by allowing you to specify which content types are supported, and how to render them, declaratively. This way, content negotiation and rendering can be decoupled.
 
 ## Setup
 
