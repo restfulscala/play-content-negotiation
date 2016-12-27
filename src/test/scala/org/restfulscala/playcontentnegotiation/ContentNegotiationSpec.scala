@@ -5,6 +5,9 @@ import org.scalatestplus.play._
 import play.api.libs.json._
 import play.api.mvc._
 import play.api.test.FakeRequest
+import play.api.test.Helpers.contentType
+
+import scala.concurrent.Future
 
 class ContentNegotiationSpec extends PlaySpec with Results with ScalaFutures {
 
@@ -28,11 +31,20 @@ class ContentNegotiationSpec extends PlaySpec with Results with ScalaFutures {
         def index() = Action { implicit req =>
           representation(r => r.respond("foo", 200))
         }
+        def async() = Action.async { implicit req =>
+          representation.async(r => Future.successful(r.respond("foo", 200)))
+        }
       }
       forAll(data) { (acceptHeader, responseStatus, expectedContentType) =>
+
         val result = controller.index()(FakeRequest().withHeaders("Accept" -> acceptHeader))
         status(result) mustEqual responseStatus
         contentType(result) mustEqual expectedContentType
+
+        val resultAsync = controller.async()(FakeRequest().withHeaders("Accept" -> acceptHeader))
+        status(resultAsync) mustEqual responseStatus
+        contentType(resultAsync) mustEqual expectedContentType
+
       }
     }
   }
