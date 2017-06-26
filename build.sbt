@@ -1,6 +1,6 @@
 versionWithGit
 
-git.baseVersion := "0.3.0"
+git.baseVersion := "0.4.0"
 
 name := "play-content-negotiation"
 
