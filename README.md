@@ -12,12 +12,14 @@ Play's content negotiation support is based on pattern matching. Unfortunately, 
 
 ## Setup
 
-`play-content-negotiation` is compiled against Play 2.5.10 and Scala 2.11. To use it in your Play application, add the following to your `build.sbt` file:
+`play-content-negotiation` is compiled against Play 2.6.0 and Scala 2.12. To use it in your Play application, add the following to your `build.sbt` file:
 
 ```scala
 resolvers += "restful-scala" at "https://dl.bintray.com/restfulscala/maven"
-libraryDependencies += "org.restfulscala" %% "play-content-negotiation" % "0.3.0"
+libraryDependencies += "org.restfulscala" %% "play-content-negotiation" % "0.4.0"
 ```
+
+If you are still on Play 2.5, please use version `0.3.0` of this library, which is compiled against Play 2.5.10 and Scala 2.11.
 
 ## Concepts
 
@@ -108,4 +110,3 @@ Acceptable media types: text/html, application/json
 ## Contributors
 
 Daniel Westheide
-
