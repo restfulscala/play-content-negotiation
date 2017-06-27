@@ -73,7 +73,7 @@ To illustrate this, here is an example controller:
 ```scala
 import play.api.mvc._
 
-class Sales(saleRepository: SaleRepository) extends Controller with ContentNegotiation {
+class Sales(saleRepository: SaleRepository, cc: ControllerComponents) extends AbstractController(cc) with ContentNegotiation {
   def negotiate()(implicit req: RequestHeader) = represent[Sale](
     as(Accepts.Html, views.html.sale(_)),
     as(Accepts.Json, Json.toJson(_))
