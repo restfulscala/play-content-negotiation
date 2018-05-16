@@ -7,8 +7,8 @@ name := "play-content-negotiation"
 organization := "org.restfulscala"
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
-  "org.scalatestplus.play" %% "scalatestplus-play" % "3.0.0" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.5" % "test",
+  "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % "test"
 )
 
 val root = project.in(file(".")).enablePlugins(PlayScala)
