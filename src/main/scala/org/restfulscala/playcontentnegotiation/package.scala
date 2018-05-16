@@ -32,13 +32,11 @@ package object playcontentnegotiation {
     }
 
     private val notAcceptable: PartialFunction[MediaRange, Result] = {
-      val f = (_: MediaRange) => notAcceptedResponse
-      PartialFunction(f)
+      case _ => notAcceptedResponse
     }
 
     private val notAcceptableAsync: PartialFunction[MediaRange, Future[Result]] = {
-      val f = (_: MediaRange) => Future.successful(notAcceptedResponse)
-      PartialFunction(f)
+      case _ => Future.successful(notAcceptedResponse)
     }
 
   }
